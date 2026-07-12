@@ -21,9 +21,9 @@ I used poetry for dependency management. After cloning the repo make sure you ru
 
 You might also need to install the Tesseract OCR binaries for your system. Refer to their [docs](https://tesseract-ocr.github.io/tessdoc/Installation.html) for how to do that.
 
-To run the script use poetry as well:
+To run the script, run the module using poetry:
 
-`poetry run python main.py`
+`poetry run python -m cfr_platforms.main`
 
 This will return the current arrivals and departures tables at Bucharest North in the CLI.
 
