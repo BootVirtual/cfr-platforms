@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import base64
 import cv2
 import pytesseract
+from rapidfuzz import process, fuzz
+from prettytable import PrettyTable
 
 res = requests.get("https://cfr.ro/gari/camereweb/index.php?statie=BucurestiNord")
 soup = BeautifulSoup(res.content, "html.parser")
@@ -127,20 +129,57 @@ number_config = (
 )
 
 operators = [
-    "CFR Calatori",
-    "Regio Calatori",
+    "CFR Călători",
+    "Regio Călători",
     "Transferoviar",
     "InterRegional",
-    "Astra Trans"
+    "Astra Trans Carpatic",
+    "Softrans Călători"
 ]
+
+train_classes = [
+    "R",
+    "RE",
+    "RM",
+    "IR",
+    "IRN",
+    "IC"
+]
+
+def fuzzy_match(value, list, threshold):
+    result = process.extractOne(value, list, scorer=fuzz.WRatio)
+    match, score, _ = result
+    if score >= threshold:
+        return match
+    return value
 
 for board_name, rows in data.items():
     for row in rows:
         row["ocr"]["type"] = pytesseract.image_to_string(row["cells"]["type"], config=general_config, lang="ron").strip()
+        row["ocr"]["type"] = fuzzy_match(row["ocr"]["type"], train_classes, 90)
         row["ocr"]["number"] = pytesseract.image_to_string(row["cells"]["number"], config=number_config, lang="ron").strip()
         row["ocr"]["destination"] = pytesseract.image_to_string(row["cells"]["destination"], config=general_config, lang="ron").strip()
         row["ocr"]["operator"] = pytesseract.image_to_string(row["cells"]["operator"], config=general_config, lang="ron").strip()
-
+        row["ocr"]["operator"] = fuzzy_match(row["ocr"]["operator"], operators, 75)
         row["ocr"]["time"] = pytesseract.image_to_string(row["cells"]["time"], config=time_config, lang="ron").strip()
         row["ocr"]["delay"] = pytesseract.image_to_string(row["cells"]["delay"], config=number_config, lang="ron").strip()
         row["ocr"]["platform"] = pytesseract.image_to_string(row["cells"]["platform"], config=number_config, lang="ron").strip()
+
+arrivals_table = PrettyTable()
+
+arrivals_table.field_names = ["Train", "No.", "From", "Operator", "Time", "Delay (min.)", "Platform"]
+for row in data["arrivals"]:
+    arrivals_table.add_row([row["ocr"]["type"], row["ocr"]["number"], row["ocr"]["destination"], row["ocr"]["operator"], row["ocr"]["time"], row["ocr"]["delay"], row["ocr"]["platform"]])
+
+print("ARRIVALS:")
+print(arrivals_table)
+
+
+departures_table = PrettyTable()
+
+departures_table.field_names = ["Train", "No.", "Destination", "Operator", "Time", "Delay (min.)", "Platform"]
+for row in data["departures"]:
+    departures_table.add_row([row["ocr"]["type"], row["ocr"]["number"], row["ocr"]["destination"], row["ocr"]["operator"], row["ocr"]["time"], row["ocr"]["delay"], row["ocr"]["platform"]])
+
+print("DEPARTURES:")
+print(departures_table)
