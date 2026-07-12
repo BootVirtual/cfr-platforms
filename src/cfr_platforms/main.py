@@ -2,19 +2,17 @@ import requests
 from bs4 import BeautifulSoup
 import base64
 import cv2
-import numpy as np
-import matplotlib.pyplot as plt
 
-res = requests.get("https://cfr.ro/gari/camereweb/index.php?statie=BucurestiNord")
-soup = BeautifulSoup(res.content, "html.parser")
-soup = soup.find(id="webcam-img")
+# res = requests.get("https://cfr.ro/gari/camereweb/index.php?statie=BucurestiNord")
+# soup = BeautifulSoup(res.content, "html.parser")
+# soup = soup.find(id="webcam-img")
 
-img = soup["src"]
-img = img.replace("data:image/jpg;base64,", '')
-img_data = base64.b64decode(img)
+# img = soup["src"]
+# img = img.replace("data:image/jpg;base64,", '')
+# img_data = base64.b64decode(img)
 
-with open("table.png", "wb") as file:
-     file.write(img_data)
+# with open("table.png", "wb") as file:
+#      file.write(img_data)
 
 img = cv2.imread("table.png")
 
@@ -28,18 +26,19 @@ departures = img[:, w//2:]
 arrivals = arrivals[60:340, :520]
 departures = departures[60:330, 40:540]
 
+_, arrivals = cv2.threshold(
+     arrivals,
+     0,
+     255,
+     cv2.THRESH_BINARY + cv2.THRESH_OTSU
+)
+
 _, departures = cv2.threshold(
      departures,
      0,
      255,
      cv2.THRESH_BINARY + cv2.THRESH_OTSU
 )
-
-projection = np.sum(departures, axis=1)
-
-# DEBUG - to be removed
-plt.plot(projection)
-plt.show()
 
 FIELDS = [
     "type",
@@ -62,6 +61,30 @@ data = {
     "arrivals": [],
     "departures": []
 }
+
+data["arrivals"].append(create_row(arrivals[26:44]))
+data["arrivals"].append(create_row(arrivals[44:61]))
+data["arrivals"].append(create_row(arrivals[61:78]))
+data["arrivals"].append(create_row(arrivals[90:107]))
+data["arrivals"].append(create_row(arrivals[107:124]))
+data["arrivals"].append(create_row(arrivals[124:141]))
+data["arrivals"].append(create_row(arrivals[151:170]))
+data["arrivals"].append(create_row(arrivals[170:187]))
+data["arrivals"].append(create_row(arrivals[187:204]))
+data["arrivals"].append(create_row(arrivals[216:232]))
+data["arrivals"].append(create_row(arrivals[232:249]))
+data["arrivals"].append(create_row(arrivals[249:266]))
+
+cv2.imwrite("test.png", data["arrivals"][0]["row"])
+
+for row in data["arrivals"]:
+    row["cells"]["type"] = row["row"][:, 23:58]
+    row["cells"]["number"] = row["row"][:, 58:109]
+    row["cells"]["destination"] = row["row"][:, 109:264]
+    row["cells"]["operator"] = row["row"][:, 264:386]
+    row["cells"]["time"] = row["row"][:, 386:433]
+    row["cells"]["delay"] = row["row"][:, 433:473]
+    row["cells"]["platform"] = row["row"][:, 473:]
 
 data["departures"].append(create_row(departures[24:41]))
 data["departures"].append(create_row(departures[41:57]))

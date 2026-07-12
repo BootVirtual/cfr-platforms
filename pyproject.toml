@@ -6,13 +6,12 @@ authors = [
     {name = "BootVirtual",email = "m@ghencea.net"}
 ]
 readme = "README.md"
-requires-python = ">=3.13,<3.15"
+requires-python = ">=3.13"
 dependencies = [
     "requests (>=2.34.2,<3.0.0)",
     "beautifulsoup4 (>=4.15.0,<5.0.0)",
     "opencv-python (>=5.0.0.93,<6.0.0.0)",
     "numpy (>=2.5.1,<3.0.0)",
-    "matplotlib (>=3.11.0,<4.0.0)",
 ]
 
 [tool.poetry]
