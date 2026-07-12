@@ -154,64 +154,6 @@ files = [
 all = ["mypy (>=1.11.2)", "pytest (>=8.3.2)", "ruff (>=0.6.2)"]
 
 [[package]]
-name = "img2table"
-version = "2.0.0"
-description = "img2table is a table identification and extraction Python Library for PDF and images, based on OpenCV image processing"
-optional = false
-python-versions = "<3.15,>=3.10"
-groups = ["main"]
-files = [
-    {file = "img2table-2.0.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:f139a98fc50eae252c52d0c5e3d7dbfc24ed253486ee503bd7d0dba23bf39fb8"},
-    {file = "img2table-2.0.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:f239a77adf85930759dd4c27b139ad7ef0cce0212530bd9e483d56f5249a1c36"},
-    {file = "img2table-2.0.0-cp310-cp310-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:9839610ee16c3e2a03dcf9a22335902020f8c8d5b61370cb9986374ff2c2be93"},
-    {file = "img2table-2.0.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:67985dfda27bd7970e1767977f89c99d92f86ffc87c4545a0c8db241e4e99aa9"},
-    {file = "img2table-2.0.0-cp310-cp310-win32.whl", hash = "sha256:9f7dc912721956afaa92bdc0b458c9ff0b964157f54e82cb2f1eafa57e00b606"},
-    {file = "img2table-2.0.0-cp310-cp310-win_amd64.whl", hash = "sha256:251ef279c2c55c004d0b9d2d9d27430a066954f0f7a7d26944e46acbb2af13be"},
-    {file = "img2table-2.0.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:296ca85b82f364ca7f2ce5ae3727b53a3cb08b641d432ef58a9d951591c94b00"},
-    {file = "img2table-2.0.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:281d64592bdac3d6b01fbe449058d03c08bfe7c09c2e67fcf4dbca57716923e1"},
-    {file = "img2table-2.0.0-cp311-cp311-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:edf4c5199d4f8e60b7b8f7b23a3482fcf031bf7248334eb4da7ec25f8c7ec534"},
-    {file = "img2table-2.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:f59259e7e8fc52d74b6ff377318125995dba75acb91c1f7a08d1f27ca5b5e9af"},
-    {file = "img2table-2.0.0-cp311-cp311-win32.whl", hash = "sha256:f4737df35b2ae2ac3682378fdc0bbd4ddc3daeb6d51807ae041727fd2012b03f"},
-    {file = "img2table-2.0.0-cp311-cp311-win_amd64.whl", hash = "sha256:40b571764571d883e062d90e8af041abb284d361a8a15dfe3fcc0bbc001c371d"},
-    {file = "img2table-2.0.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:19755bf5e17278c0ddeef8d870bf3213b952ab1e570585b870880e90b1303108"},
-    {file = "img2table-2.0.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:d1fa566deda469e88363bbcee5bdc5c81b7414691bd803d72170a0fe53f85848"},
-    {file = "img2table-2.0.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:f2de600d519827d2f421ffba5715621741317533dc4255c19b9dd8f26e0a30bd"},
-    {file = "img2table-2.0.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:d8db3f0704448a8d6b4bbfb859454fe11b334c121c9845abdc525ef750335793"},
-    {file = "img2table-2.0.0-cp312-cp312-win32.whl", hash = "sha256:c12acf39816ecc11ae01f43de3fa786936a630d42446291465d9b8e1c56873ac"},
-    {file = "img2table-2.0.0-cp312-cp312-win_amd64.whl", hash = "sha256:59c1a77f44cb3693579aeb896b9c6e5fcab979325a6d9b50840f8e3f2e411e29"},
-    {file = "img2table-2.0.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:a0ca038b7ae7cb43976ed28e5683c81b0698efc962dc3eeef6b67bcf5c15698e"},
-    {file = "img2table-2.0.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:650c0aa501ad500034c157b5ecacd660337e2bfe25f2ead34b30c5144ab5259a"},
-    {file = "img2table-2.0.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:a968433df0f92de27d679dc0d7d9337fc9623aca72085918d6975d99c3006305"},
-    {file = "img2table-2.0.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:2d63e2a69c11b054ad179b319fd840a2f9271530cf7d852f9512e2ad6cd1df52"},
-    {file = "img2table-2.0.0-cp313-cp313-win32.whl", hash = "sha256:958db2c959a1de8a6e0250740dcd3bbafb399ec8c082d4b1eaa6944c4aec1325"},
-    {file = "img2table-2.0.0-cp313-cp313-win_amd64.whl", hash = "sha256:e3b93ca8d3fbb1a87caa83a5310a1bb7a99aa79bb3cfbadc409de09fe8c9cf26"},
-    {file = "img2table-2.0.0-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:b314e9c0506c6650471ff2f16feec947c37b4b187a7418db2abf27d82b1c7e28"},
-    {file = "img2table-2.0.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:bb6544b6cc0c6fa01c5d07810af1731b82939d1536da1a76bc6dcec74be9abd7"},
-    {file = "img2table-2.0.0-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:5d12faf07b00fca6de9d2935c4b8672cb7c691b86331ed1df18b79fd8d046589"},
-    {file = "img2table-2.0.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:702e1cad5d4dc747414bd770b0a49322fd9358ac845abead25672767d14ee234"},
-    {file = "img2table-2.0.0-cp314-cp314-win32.whl", hash = "sha256:be3badd3917c10bddc79123affbbcbd9c2bf66e392169367117a32940ec9aa55"},
-    {file = "img2table-2.0.0-cp314-cp314-win_amd64.whl", hash = "sha256:57f81724ba8702579e158cc57d05eee856c696090d245140da549bb0e62c6d97"},
-    {file = "img2table-2.0.0.tar.gz", hash = "sha256:584334b46c898d733a2a44941df96bed2fefb2cd5e89ae57830614e6119be06f"},
-]
-
-[package.dependencies]
-beautifulsoup4 = "*"
-numpy = "*"
-opencv-contrib-python = ">=4"
-pypdfium2 = ">=4.30.0"
-xlsxwriter = ">=3.0.6"
-
-[package.extras]
-aws = ["boto3"]
-azure = ["azure-cognitiveservices-vision-computervision"]
-doctr = ["python-doctr"]
-easyocr = ["easyocr (>=1.7.0)", "pillow (>=10.0.1)"]
-gcp = ["google-cloud-vision", "requests"]
-paddle = ["paddleocr (>=3) ; python_version < \"3.14\"", "paddlepaddle ; python_version < \"3.14\""]
-rapidocr = ["onnxruntime", "onnxruntime (<1.24) ; python_version < \"3.11\"", "rapidocr"]
-surya = ["surya-ocr (>=0.15.0) ; python_version >= \"3.10\""]
-
-[[package]]
 name = "numpy"
 version = "2.5.1"
 description = "Fundamental package for array computing in Python"
@@ -266,58 +208,26 @@ files = [
 ]
 
 [[package]]
-name = "opencv-contrib-python"
+name = "opencv-python"
 version = "5.0.0.93"
 description = "Wrapper package for OpenCV python bindings."
 optional = false
 python-versions = ">=3.6"
 groups = ["main"]
 files = [
-    {file = "opencv_contrib_python-5.0.0.93-cp37-abi3-macosx_13_0_arm64.whl", hash = "sha256:3ebb8e0506573f36f54038116321a086c97aeda8ef154198931f3ea18b435cc7"},
-    {file = "opencv_contrib_python-5.0.0.93-cp37-abi3-macosx_14_0_x86_64.whl", hash = "sha256:45a1ce7c68828907348e649edd471a7dc5244d3d0ac21989e67c63d2f4fa629a"},
-    {file = "opencv_contrib_python-5.0.0.93-cp37-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:cac609c9a4fce67feb287837c671a2c4da9467df8e47fa0cce7bdc453d12a529"},
-    {file = "opencv_contrib_python-5.0.0.93-cp37-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:29b916da864002a921c79b6df4cfb2dcf79870f166ddf3ce1179b558bc7313d7"},
-    {file = "opencv_contrib_python-5.0.0.93-cp37-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:b84f0b0fcdbd2421b5819e517542463e71eed7f41e0a0c4ec280ed88b7269a66"},
-    {file = "opencv_contrib_python-5.0.0.93-cp37-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:8427dcb0561dc3ba32f3771c627f52b87c29932c265bea28ffcb54804c3c3fec"},
-    {file = "opencv_contrib_python-5.0.0.93-cp37-abi3-win32.whl", hash = "sha256:dd8a80a04a8610c033757135b7846ad2027ba2d3bf9faf2f83f3dc6ed9e3814a"},
-    {file = "opencv_contrib_python-5.0.0.93-cp37-abi3-win_amd64.whl", hash = "sha256:461622db95c964652d4d8fda171034961c3de270f78a6095aaad31050771774a"},
-    {file = "opencv_contrib_python-5.0.0.93.tar.gz", hash = "sha256:da0ba61096b08c63cb4440d8fd6f323835cbb78b714c5ba22a39e1db68c83166"},
+    {file = "opencv_python-5.0.0.93-cp37-abi3-macosx_13_0_arm64.whl", hash = "sha256:198a75138241810206a17c829dbcc40a7cb1841cda538ca86cbbfc6c7d95f898"},
+    {file = "opencv_python-5.0.0.93-cp37-abi3-macosx_14_0_x86_64.whl", hash = "sha256:6bbc32f59e1b1a7db7b39c81f63d00625f041d333037fd8702f6da52cc39108b"},
+    {file = "opencv_python-5.0.0.93-cp37-abi3-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:e2b4272e736836f66c2d176e43ab8101f3a00d45654916399f52e150c58981ac"},
+    {file = "opencv_python-5.0.0.93-cp37-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:f8b6d0a212253dd26ad338c812f1f23ca118fdf05a9c8c6b9444f161aa8c5881"},
+    {file = "opencv_python-5.0.0.93-cp37-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:08d5d91d967b58d6db86073b2ad3eaef88ca4ebdfd45c9059bf59f5ded0c7ad2"},
+    {file = "opencv_python-5.0.0.93-cp37-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:c8de2dec111122a02e8beb28e16c31904992dfd6186560b142a92c71403c1039"},
+    {file = "opencv_python-5.0.0.93-cp37-abi3-win32.whl", hash = "sha256:4b4b1a34c79bf8d3738e3cfe9a9e67b51a79663f6b692cbdad8c31f570da4157"},
+    {file = "opencv_python-5.0.0.93-cp37-abi3-win_amd64.whl", hash = "sha256:f90ba04b8f73bc5c3814037699739f0156f597338a98f05956c684e7c3ca10d2"},
+    {file = "opencv_python-5.0.0.93.tar.gz", hash = "sha256:66aac3e5b5faa48d4025816592f3af19e4bfc2c68dec067bae2dbb4ca10aa9e2"},
 ]
 
 [package.dependencies]
 numpy = {version = ">=2", markers = "python_version >= \"3.9\""}
-
-[[package]]
-name = "pypdfium2"
-version = "5.11.0"
-description = "Python bindings to PDFium"
-optional = false
-python-versions = ">=3.6"
-groups = ["main"]
-files = [
-    {file = "pypdfium2-5.11.0-py3-none-android_23_arm64_v8a.whl", hash = "sha256:115bc68ab2e85c9ee46f97a4c1794f1d7205c8b763fc5c16d9893eaa54608627"},
-    {file = "pypdfium2-5.11.0-py3-none-android_23_armeabi_v7a.whl", hash = "sha256:4396d0848b79134fcdf141a4e3dfe6719efe1162309a02876b440025cfd80720"},
-    {file = "pypdfium2-5.11.0-py3-none-macosx_12_0_arm64.whl", hash = "sha256:73fe55dd258f02332bc0a34128ddc2994fd610e664d1f2f7d78dd9e2570f15ee"},
-    {file = "pypdfium2-5.11.0-py3-none-macosx_12_0_x86_64.whl", hash = "sha256:badb4f4df98e25fb1b58301911c98fa18da60de98b0223a6ffa91717be068b96"},
-    {file = "pypdfium2-5.11.0-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1fbff7c3e3141f24f3a25cedddbb6c6d17baa95f83c7b7ea40d6866956df3a43"},
-    {file = "pypdfium2-5.11.0-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:faeda49c171be254b5028b7d17e54306c585374210d3e7ea4962a36774d5b76a"},
-    {file = "pypdfium2-5.11.0-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:b63f6f1e67d05d2bc36f55c35ede5cd18ded8886a2fcf68f320d188ee7934348"},
-    {file = "pypdfium2-5.11.0-py3-none-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:44f96d8459b4ba9d1330ab44a8dde836b361cb00027830eaab710080888cf44a"},
-    {file = "pypdfium2-5.11.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ba8a78329c10f01c80b1f6e9aa33cac13665c198d056a007827b703958bd986d"},
-    {file = "pypdfium2-5.11.0-py3-none-manylinux_2_27_s390x.manylinux_2_28_s390x.whl", hash = "sha256:e7a60197c5d18b0ec77a695e4a1082f89f323c13063cecf4446f1297ed632a36"},
-    {file = "pypdfium2-5.11.0-py3-none-manylinux_2_34_riscv64.manylinux_2_39_riscv64.whl", hash = "sha256:53d167456433d565398a5c9f1efad23dfa6dfadc1a201ec687594fec645d843e"},
-    {file = "pypdfium2-5.11.0-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:953f5bcb6a65067381f0a38c50ffaed864fac6f20b0fa2c14ffb15a52bda8943"},
-    {file = "pypdfium2-5.11.0-py3-none-musllinux_1_2_armv7l.whl", hash = "sha256:479b081423b2c16de44ddb6e25826d665298e1ee7cf09d802b656716dd930201"},
-    {file = "pypdfium2-5.11.0-py3-none-musllinux_1_2_i686.whl", hash = "sha256:81356f0503356d6f21629fcd47bbfffcfe26487f47a7989a56c02bd4e39b4c55"},
-    {file = "pypdfium2-5.11.0-py3-none-musllinux_1_2_ppc64le.whl", hash = "sha256:25be9d70f5776c68fa28b92ec42a7be91de5d6c4085ed5c6c89e1bfa373ae918"},
-    {file = "pypdfium2-5.11.0-py3-none-musllinux_1_2_riscv64.whl", hash = "sha256:8edec20239f77d4dea2eeee5d29ebd83e77e1e2900691b77387fead76f81bc4a"},
-    {file = "pypdfium2-5.11.0-py3-none-musllinux_1_2_s390x.whl", hash = "sha256:2560db37ce77a6caf651dc129bc44ee610a5fbb0050ec70f5a643f76bf241173"},
-    {file = "pypdfium2-5.11.0-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:34086bc1fcb964bb8104889d941ba9c8a35a75866250bb81d2f2bb2791bb42af"},
-    {file = "pypdfium2-5.11.0-py3-none-win32.whl", hash = "sha256:324054f36acf6bea42a9d2534eb407da2e312dba746d955c9fd7e324bc160898"},
-    {file = "pypdfium2-5.11.0-py3-none-win_amd64.whl", hash = "sha256:d3b698e7b51bdf2d633cc834395677319e1d66757896b30c632dfac7d7236c81"},
-    {file = "pypdfium2-5.11.0-py3-none-win_arm64.whl", hash = "sha256:897788d71b740752e29875856c369fdb52283f609aecf2355f0473db05dfc1b6"},
-    {file = "pypdfium2-5.11.0.tar.gz", hash = "sha256:0733749ac253c615953a5e75d4322b9f1de8c0d90137ec8dbcef403f3e57b5d9"},
-]
 
 [[package]]
 name = "requests"
@@ -383,19 +293,7 @@ h2 = ["h2 (>=4,<5)"]
 socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 
-[[package]]
-name = "xlsxwriter"
-version = "3.2.9"
-description = "A Python module for creating Excel XLSX files."
-optional = false
-python-versions = ">=3.8"
-groups = ["main"]
-files = [
-    {file = "xlsxwriter-3.2.9-py3-none-any.whl", hash = "sha256:9a5db42bc5dff014806c58a20b9eae7322a134abb6fce3c92c181bfb275ec5b3"},
-    {file = "xlsxwriter-3.2.9.tar.gz", hash = "sha256:254b1c37a368c444eac6e2f867405cc9e461b0ed97a3233b2ac1e574efb4140c"},
-]
-
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13,<3.15"
-content-hash = "85966626db56a13e773faa171c844a1640a25ea3917fa69ffd790dbfac434669"
+content-hash = "85327e49c85721474ad32dc85faceaeb3d15644904e96e0973c24b7e4c04448a"

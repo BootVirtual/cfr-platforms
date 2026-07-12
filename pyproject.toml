@@ -10,7 +10,7 @@ requires-python = ">=3.13,<3.15"
 dependencies = [
     "requests (>=2.34.2,<3.0.0)",
     "beautifulsoup4 (>=4.15.0,<5.0.0)",
-    "img2table (>=2.0.0,<3.0.0)",
+    "opencv-python (>=5.0.0.93,<6.0.0.0)",
 ]
 
 [tool.poetry]
