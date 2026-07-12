@@ -9,3 +9,7 @@ app = FastAPI(
 @app.get("/stations/{station}")
 def station(station):
     return get_station_data(station)
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
