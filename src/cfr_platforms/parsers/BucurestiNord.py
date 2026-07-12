@@ -26,14 +26,14 @@ def parse(img):
     )
 
     FIELDS = [
-    "type",
-    "number",
-    "destination",
-    "operator",
-    "time",
-    "delay",
-    "platform"
-]
+        "type",
+        "number",
+        "destination",
+        "operator",
+        "time",
+        "delay",
+        "platform"
+    ]
 
     def create_row(row):
         return {
