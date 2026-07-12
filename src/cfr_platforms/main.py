@@ -2,17 +2,18 @@ import requests
 from bs4 import BeautifulSoup
 import base64
 import cv2
+import pytesseract
 
-# res = requests.get("https://cfr.ro/gari/camereweb/index.php?statie=BucurestiNord")
-# soup = BeautifulSoup(res.content, "html.parser")
-# soup = soup.find(id="webcam-img")
+res = requests.get("https://cfr.ro/gari/camereweb/index.php?statie=BucurestiNord")
+soup = BeautifulSoup(res.content, "html.parser")
+soup = soup.find(id="webcam-img")
 
-# img = soup["src"]
-# img = img.replace("data:image/jpg;base64,", '')
-# img_data = base64.b64decode(img)
+img = soup["src"]
+img = img.replace("data:image/jpg;base64,", '')
+img_data = base64.b64decode(img)
 
-# with open("table.png", "wb") as file:
-#      file.write(img_data)
+with open("table.png", "wb") as file:
+     file.write(img_data)
 
 img = cv2.imread("table.png")
 
@@ -102,12 +103,44 @@ data["departures"].append(create_row(departures[245:261]))
 for row in data["departures"]:
     row["cells"]["type"] = row["row"][:, 20:53]
     row["cells"]["number"] = row["row"][:, 53:106]
-    row["cells"]["destination"] = row["row"][:, 106:260]
-    row["cells"]["operator"] = row["row"][:, 260:377]
-    row["cells"]["time"] = row["row"][:, 377:422]
+    row["cells"]["destination"] = row["row"][:, 106:258]
+    row["cells"]["operator"] = row["row"][:, 258:375]
+    row["cells"]["time"] = row["row"][:, 375:422]
     row["cells"]["delay"] = row["row"][:, 422:462]
     row["cells"]["platform"] = row["row"][:, 462:]
 
-
 cv2.imwrite("arrivals.png", arrivals)
 cv2.imwrite("departures.png", departures)
+
+general_config = (
+    "--psm 7 "
+)
+
+time_config = (
+    "--psm 7 "
+    "-c tessedit_char_whitelist=1234567890:"
+)
+
+number_config = (
+    "--psm 7 "
+    "-c tessedit_char_whitelist=1234567890"
+)
+
+operators = [
+    "CFR Calatori",
+    "Regio Calatori",
+    "Transferoviar",
+    "InterRegional",
+    "Astra Trans"
+]
+
+for board_name, rows in data.items():
+    for row in rows:
+        row["ocr"]["type"] = pytesseract.image_to_string(row["cells"]["type"], config=general_config, lang="ron").strip()
+        row["ocr"]["number"] = pytesseract.image_to_string(row["cells"]["number"], config=number_config, lang="ron").strip()
+        row["ocr"]["destination"] = pytesseract.image_to_string(row["cells"]["destination"], config=general_config, lang="ron").strip()
+        row["ocr"]["operator"] = pytesseract.image_to_string(row["cells"]["operator"], config=general_config, lang="ron").strip()
+
+        row["ocr"]["time"] = pytesseract.image_to_string(row["cells"]["time"], config=time_config, lang="ron").strip()
+        row["ocr"]["delay"] = pytesseract.image_to_string(row["cells"]["delay"], config=number_config, lang="ron").strip()
+        row["ocr"]["platform"] = pytesseract.image_to_string(row["cells"]["platform"], config=number_config, lang="ron").strip()
