@@ -15,6 +15,8 @@ The script is provided as-is, I assume no responsability for the accuracy of thi
 
 ## Usage
 
+### CLI
+
 I used poetry for dependency management. After cloning the repo make sure you run:
 
 `poetry install`
@@ -66,11 +68,17 @@ DEPARTURES:
 +-------+--------+-------------------+----------------+-------+--------------+----------+
 ```
 
+### API
+
+I threw a quick little FastAPI at this script. The only working endpoint right now is `/stations/BucurestiNord`, which returns very nice JSON which is also kind of self explanatory (aka I have no will to document it right now, but it really is self explanatory, trust me).
+
+To run the API I've used `uvicorn` (`poetry run uvicorn cfr_platforms.api:app`).
+
 ## Roadmap(-ish)
 
 I should probably expand a little more upon this project. Cool things would be (in no particular order):
 
-- some sort of an API or something to be able to interface with the script
+- ~~some sort of an API or something to be able to interface with the script~~ kind of there, see above
 - more stations
 - station fuzzy matching (although I would need a proper list of stations for that)
 - ???
