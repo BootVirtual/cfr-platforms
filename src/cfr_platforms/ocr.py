@@ -15,6 +15,11 @@ number_config = (
     "-c tessedit_char_whitelist=1234567890"
 )
 
+platform_config = (
+    "--psm 7 "
+    "-c tessedit_char_whitelist=1234567890A"
+)
+
 class_config = (
     "--psm 7 "
     "-c tessedit_char_whitelist=IRMCNE"
@@ -41,27 +46,40 @@ train_classes = [
 stations = [
     "ADJUD",
     "AEROPORT H COANDĂ",
+    "ARAD",
+    "BAIA MARE",
+    "BISTRIȚA N.",
+    "BONTIDA",
     "BRAȘOV",
-    "BUDAPESTA KELETI",
+    "BUCUREȘTI N.",
     "BUCUREȘTI OBOR",
+    "BUDAPESTA KELETI",
     "BUZĂU",
+    "CÂMPIA TURZII",
     "CLUJ NAPOCA",
     "CONSTANȚA",
     "CRAIOVA",
+    "CURTICI",
+    "DEJ",
     "DEVA",
     "FETEȘTI",
     "GALAȚI",
     "IAȘI",
+    "MANGALIA",
     "PITEȘTI",
     "PLOIEȘTI SUD",
-    "ROȘIORI NORD"
+    "ROȘIORI NORD",
     "RUSE",
+    "SIBIU",
+    "SIMERIA",
+    "SLOBOZIA VECHE",
     "SUCEAVA",
     "SUCEAVA NORD",
     "TIMIȘOARA NORD",
     "TÂRGOVIȘTE",
     "TÂRGU JIU",
     "TEIUȘ",
+    "TG. MUREȘ",
     "URZICENI",
     "VIENA"
 ]
@@ -85,7 +103,7 @@ def ocr(data):
             row["ocr"]["operator"] = fuzzy_match(row["ocr"]["operator"], operators, 75)
             row["ocr"]["time"] = pytesseract.image_to_string(row["cells"]["time"], config=time_config, lang="ron").strip()
             row["ocr"]["delay"] = pytesseract.image_to_string(row["cells"]["delay"], config=number_config, lang="ron").strip()
-            row["ocr"]["platform"] = pytesseract.image_to_string(row["cells"]["platform"], config=number_config, lang="ron").strip()
+            row["ocr"]["platform"] = pytesseract.image_to_string(row["cells"]["platform"], config=platform_config, lang="ron").strip()
 
     return {
         board: [

@@ -7,6 +7,7 @@ Web scraper and parser for CFR (romanian railways) platform and delay informatio
 Digitalisation is hard. The CFR offer no realtime information for train departures, but instead offer [webcams pointed to the departures board](https://cfr.ro/gari/camereweb/index.php?statie=BucurestiNord) of a couple of railway stations. This project aims to convert the images provided by the respective webcams into something more usable online.
 
 The first station to be implemented is Bucharest North, as that's Romania's biggest/busiest station.
+Also implemented is Cluj Napoca (although it is quite inaccurate. who would've though that tesseract ocr doesn't particularly like webcam images pointed at split flap displays??)
 
 ## Note
 
@@ -29,9 +30,11 @@ You might also need to install the Tesseract OCR binaries for your system. Refer
 
 To run the script, run the module using poetry:
 
-`poetry run python -m cfr_platforms.main`
+`poetry run python -m cfr_platforms.main <STATION>`
 
-This will return the current arrivals and departures tables at Bucharest North in the CLI.
+Where `<STATION>` is either `BucurestiNord` or `ClujNapoca`.
+
+This will return the current arrivals and departures tables at the desired station in the CLI.
 
 The output should resemble the following:
 
@@ -74,7 +77,7 @@ DEPARTURES:
 
 ### API
 
-I threw a quick little FastAPI at this script. The only working endpoint right now is `/stations/BucurestiNord`, which returns very nice JSON which is also kind of self explanatory (aka I have no will to document it right now, but it really is self explanatory, trust me).
+I threw a quick little FastAPI at this script. The only working endpoint right now is `/stations/<STATION>`, which returns very nice JSON which is also kind of self explanatory (aka I have no will to document it right now, but it really is self explanatory, trust me).
 
 Deploying can be done via the included Dockerfile.
 
