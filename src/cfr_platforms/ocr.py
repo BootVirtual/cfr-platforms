@@ -40,9 +40,10 @@ train_classes = [
 
 stations = [
     "ADJUD",
-    "AEROPORT H COANDA",
+    "AEROPORT H COANDĂ",
     "BRAȘOV",
     "BUDAPESTA KELETI",
+    "BUCUREȘTI OBOR",
     "BUZĂU",
     "CLUJ NAPOCA",
     "CONSTANȚA",
@@ -51,6 +52,7 @@ stations = [
     "IAȘI",
     "PITEȘTI",
     "PLOIEȘTI SUD",
+    "ROȘIORI NORD"
     "RUSE",
     "SUCEAVA",
     "TIMIȘOARA NORD",
@@ -72,7 +74,7 @@ def ocr(data):
             row["ocr"]["type"] = fuzzy_match(row["ocr"]["type"], train_classes, 90)
             row["ocr"]["number"] = pytesseract.image_to_string(row["cells"]["number"], config=number_config, lang="ron").strip()
             row["ocr"]["destination"] = pytesseract.image_to_string(row["cells"]["destination"], config=general_config, lang="ron").strip().upper()
-            row["ocr"]["destination"] = fuzzy_match(row["ocr"]["destination"], stations, 85)
+            row["ocr"]["destination"] = fuzzy_match(row["ocr"]["destination"], stations, 80)
             row["ocr"]["operator"] = pytesseract.image_to_string(row["cells"]["operator"], config=general_config, lang="ron").strip()
             row["ocr"]["operator"] = fuzzy_match(row["ocr"]["operator"], operators, 75)
             row["ocr"]["time"] = pytesseract.image_to_string(row["cells"]["time"], config=time_config, lang="ron").strip()
