@@ -1,7 +1,8 @@
+import sys
 from cfr_platforms import logic
 from prettytable import PrettyTable
 
-data = logic.get_station_data("BucurestiNord")
+data = logic.get_station_data(sys.argv[1])
 
 arrivals_table = PrettyTable()
 

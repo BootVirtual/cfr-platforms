@@ -1,6 +1,8 @@
 import cv2
 
 def parse(img):
+    img = img[0]
+
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     h, w = img.shape[:2]

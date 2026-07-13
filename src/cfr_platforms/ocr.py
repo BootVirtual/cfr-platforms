@@ -48,6 +48,8 @@ stations = [
     "CLUJ NAPOCA",
     "CONSTANȚA",
     "CRAIOVA",
+    "DEVA",
+    "FETEȘTI",
     "GALAȚI",
     "IAȘI",
     "PITEȘTI",
@@ -55,9 +57,13 @@ stations = [
     "ROȘIORI NORD"
     "RUSE",
     "SUCEAVA",
+    "SUCEAVA NORD",
     "TIMIȘOARA NORD",
     "TÂRGOVIȘTE",
     "TÂRGU JIU",
+    "TEIUȘ",
+    "URZICENI",
+    "VIENA"
 ]
 
 def ocr(data):
