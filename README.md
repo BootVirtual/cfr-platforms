@@ -77,9 +77,9 @@ DEPARTURES:
 
 ### API
 
-I threw a quick little FastAPI at this script. The only working endpoint right now is `/stations/<STATION>`, which returns very nice JSON which is also kind of self explanatory (aka I have no will to document it right now, but it really is self explanatory, trust me).
+The API was built using FastAPI. Available endpoints are `/stations` to list supported stations, `/stations/<STATION>` to fetch arrivals and departures for a particular station and `/health` for a basic health check of the service. More in-depth docs are available at `/docs`.
 
-Deploying can be done via the included Dockerfile.
+Deploying can be done via the included Dockerfile (don't forget to edit your host/port bindings!)
 
 To run the API I've used `uvicorn` (`poetry run uvicorn cfr_platforms.api:app`).
 
@@ -89,7 +89,7 @@ I have tried hosting the API with a free provider, but the OCR would consistentl
 
 I should probably expand a little more upon this project. Cool things would be (in no particular order):
 
-- ~~some sort of an API or something to be able to interface with the script~~ kind of there, see above
+- ~~some sort of an API or something to be able to interface with the script~~ done
 - more stations
 - ~~station fuzzy matching (although I would need a proper list of stations for that)~~ done, kind of
 - ???
