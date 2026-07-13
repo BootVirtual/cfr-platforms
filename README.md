@@ -13,6 +13,10 @@ The first station to be implemented is Bucharest North, as that's Romania's bigg
 While this script will return something, there is absolutely no guarantee that it is accurate (it's OCR based after all...)
 The script is provided as-is, I assume no responsability for the accuracy of this script.
 
+While the script/API will always fetch the latest departure board, text might not get recognised properly all of the time. This is due to a mixture of the OCR software and the (somewhat bad) quality image CFR provides (thinking about it, quality also probably varies by time of day, as that affects lighting conditions of the physical board. If CFR would actually publish their data in a proper way, we wouldn't be in this rabbithole right now).
+
+There is a fuzzy matching mechanism implemented for train classes, operators and stations. The stations list might not be (is definitely not) complete. I'll have to add upon it as time passes, but it should right now already catch a lot of the most common mistakes/inaccuracies.
+
 ## Usage
 
 ### CLI
@@ -29,50 +33,54 @@ To run the script, run the module using poetry:
 
 This will return the current arrivals and departures tables at Bucharest North in the CLI.
 
-The output should resemble the following (as you can maybe see, text might not get recognised properly all of the time. This is due to a mixture of the OCR software and the (somewhat bad) quality image CFR provides (thinking about it, quality also probably varies by time of day, as that affects lighting conditions of the physical board. if CFR would actually publish their data in a proper way, we wouldn't be in this rabbithole right now)):
+The output should resemble the following:
 
 ```text
 ARRIVALS:
-+-------+--------+--------------------+----------------------+-------+--------------+----------+
-| Train |  No.   |        From        |       Operator       |  Time | Delay (min.) | Platform |
-+-------+--------+--------------------+----------------------+-------+--------------+----------+
-|   R   | 16594  |      BRAŞOYv       |    InterRegional     | 18:42 |     300      |          |
-|   R   | 11536  |       BRAȘOV       | Astra Trans Carpatic | 19:43 |     200      |          |
-|   R   |  1838  |       BRASOV       |     CFR Călători     | 20:04 |     145      |          |
-|   R   | 41538  |       BRASOV       | Astra Trans Carpatic | 21:04 |     200      |          |
-|   IR  | 18023  |   TIMISOARA NORD   |     CFR Călători     | 21:11 |      8       |          |
-|   IR  | 15574  |       BRAȘOV       |    InterRegional     | 21:31 |     160      |          |
-|       |  4382  |     CONSTANŢA      |     CFR Călători     | 21:23 |      69      |          |
-|   IR  | 10084  |      MANGALIA      |    Transferoviar     | 22:00 |      40      |          |
-|   R   | 41836  |    CLUJ NAPOCA     |     CFR Călători     | 22:04 |      30      |          |
-|   RE  | 10120  | AEROPORI îi COANDA |    Transferoviar     | 22:17 |              |    10    |
-|   RE  | 410588 |       ADJUD        |    Regio Călători    | 22:31 |      25      |          |
-|   IR  |  1522  |       SIBIU        |     CFR Călători     | 22:35 |      85      |          |
-+-------+--------+--------------------+----------------------+-------+--------------+----------+
++-------+---------+-------------------+----------------+-------+--------------+----------+
+| Train |   No.   |        From       |    Operator    |  Time | Delay (min.) | Platform |
++-------+---------+-------------------+----------------+-------+--------------+----------+
+|   R   |  129073 |      CRAIOVA      |  CFR Călători  |  9:34 |      89      |    3     |
+|   R   |  10262  |     TARSOVIŞTE    | Transferoviar  | 19:27 |      25      |    4     |
+|   RE  |   3910  |      CRAIOVA      |  CFR Călători  | 10:39 |      25      |    1     |
+|  IRN  |   473   |  BUDAPESTA KELETI |  CFR Călători  | 10:37 |      20      |    14    |
+|   RE  |  11066  |       ADJUD       | Regio Călători | 10:52 |      15      |          |
+|   RM  |   7922  | AEROPORT H COANDA |  CFR Călători  | 10:37 |              |          |
+|   RE  | 4100671 |    PLOIEȘTI SUD   | Transferoviar  | 41:03 |      15      |          |
+|   IR  |  10072  |       GALAŢI      | Triaiwiaroviar | 11:10 |      15      |          |
+|   CC  |   582   |     CONSTANȚA     |  CFR Călători  | 11:27 |              |          |
+|   IR  |   1826  |      TARGU Ji     |  GR Căâlatari  | 14:28 |              |          |
+|   RE  |  44032  |       BRAȘOV      | Regio Călători | 11:34 |      13      |          |
+|   RE  |  40142  | AEROPORT H COANDA | Transferoviar  |   47  |              |          |
++-------+---------+-------------------+----------------+-------+--------------+----------+
 DEPARTURES:
-+-------+--------+-------------------+----------------+-------+--------------+----------+
-| Train |  No.   |    Destination    |    Operator    |  Time | Delay (min.) | Platform |
-+-------+--------+-------------------+----------------+-------+--------------+----------+
-|   IR  |  4389  |     CONSTANŢA     |  CFR Călători  | 20:33 |     120      |          |
-|   R   | 16577  |      BRASOYV      | InterRegional  | 21:50 |     120      |          |
-|   R   | 16537  |    CLUJ NAPOCA    | InterRegional  | 22:00 |      60      |          |
-|   R   |  1653  |  VATRA DORNEI BAI |  CFR Călători  | 22:20 |              |    9     |
-|   R   |  5935  |   PLOIESTI! SUD   |  CFR Călători  |  :27  |              |          |
-|   RE  | 40423  | AEROPORT H COANDĂ | Transferoviar  | 22:30 |              |    10    |
-|  IRN  |  4569  |        IASI       |  CFR Călători  | 22:38 |              |          |
-|   RE  | 410693 |       ADJUD       | Regio Călători | 23:01 |              |          |
-|   RM  |  7345  | AEROPORT H COANDĂ |  CFR Călători  | 23:10 |              |          |
-|   IR  |  4914  |       SIBIU       |  CFR Călători  | 23:14 |              |          |
-|   RM  |  7947  | AEROPORT H COANDĂ |  CFR Călători  | 23:30 |              |          |
-|   RM  |  7904  | AEROPORT H COANDĂ |  CFR Călători  |  0:30 |              |          |
-+-------+--------+-------------------+----------------+-------+--------------+----------+
++-------+-------+-------------------+---------------+-------+--------------+----------+
+| Train |  No.  |    Destination    |    Operator   |  Time | Delay (min.) | Platform |
++-------+-------+-------------------+---------------+-------+--------------+----------+
+|   R   | 10283 |     TÂRGOVIȘTE    | Transferoviar | 10:45 |      10      |    4     |
+|       |  1553 |      SUCEAVA      |  CFR Călători | 11:10 |              |    6     |
+|   RM  |  7921 | AEROPORT H COANDA |  CFR Călători | 11:10 |              |          |
+|   IR  | 16021 |   TIMIȘOARA NORD  |  CFR Călători | 11:20 |              |          |
+|   RE  |  9208 |      PITEȘTI      |  CFR Călători | 11:25 |              |          |
+|   IR  | 16085 |     CONSTANȚA     |  CFR Călători | 11:30 |              |          |
+|   RE  | 40113 | AEROPORT H COANDA | Transferoviar | 11:50 |              |          |
+|   IR  |  466  |        AŞ:        |  CFR Călători | 11:38 |              |          |
+|   IR  | 18568 |       RRASOV      | InterRegional | 12:00 |              |          |
+|   RE  | 10052 |       BUZĂU       | Transferoviar | 12:12 |              |          |
+|   IC  |  534  |    CLUJ NAPOCA    |  CFR Călători | 12:21 |              |          |
+|   CI  | 23293 | AEROPORT H COANDA |  CFR Călători |  1:30 |              |          |
++-------+-------+-------------------+---------------+-------+--------------+----------+
 ```
 
 ### API
 
 I threw a quick little FastAPI at this script. The only working endpoint right now is `/stations/BucurestiNord`, which returns very nice JSON which is also kind of self explanatory (aka I have no will to document it right now, but it really is self explanatory, trust me).
 
+Deploying can be done via the included Dockerfile.
+
 To run the API I've used `uvicorn` (`poetry run uvicorn cfr_platforms.api:app`).
+
+I have tried hosting the API with a free provider, but the OCR would consistently time out/exhaust the available resources (who would've though OCR is no easy task?)
 
 ## Roadmap(-ish)
 
@@ -80,7 +88,7 @@ I should probably expand a little more upon this project. Cool things would be (
 
 - ~~some sort of an API or something to be able to interface with the script~~ kind of there, see above
 - more stations
-- station fuzzy matching (although I would need a proper list of stations for that)
+- ~~station fuzzy matching (although I would need a proper list of stations for that)~~ done, kind of
 - ???
 
 ## Endnote
