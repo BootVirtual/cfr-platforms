@@ -30,8 +30,24 @@ def parse(img):
 
     arrivals = cv2.warpPerspective(arrivals, cv2.getPerspectiveTransform(arrivals_source, arrivals_dest), (w, h))
 
-    cv2.imwrite("arrivals.png", arrivals)
-    cv2.imwrite("departures.png", departures)
+    departures_source = np.float32([
+        [116, 121],
+        [1010, 127],
+        [1004, 512],
+        [99, 490]
+    ])
+
+    w = 920
+    h = 400
+
+    departures_dest = np.float32([
+        [0, 0],
+        [w, 0],
+        [w, h],
+        [0, h]
+    ])
+
+    departures = cv2.warpPerspective(departures, cv2.getPerspectiveTransform(departures_source, departures_dest), (w, h))
 
     FIELDS = [
         "type",
@@ -75,6 +91,24 @@ def parse(img):
         row["cells"]["delay"] = row["row"][:, 717:817]
         row["cells"]["platform"] = row["row"][:, 817:]
 
-    cv2.imwrite("test.png", data["arrivals"][9]["cells"]["number"])
+    data["departures"].append(create_row(departures[0:41]))
+    data["departures"].append(create_row(departures[41:81]))
+    data["departures"].append(create_row(departures[81:122]))
+    data["departures"].append(create_row(departures[122:160]))
+    data["departures"].append(create_row(departures[160:200]))
+    data["departures"].append(create_row(departures[200:241]))
+    data["departures"].append(create_row(departures[241:280]))
+    data["departures"].append(create_row(departures[280:320]))
+    data["departures"].append(create_row(departures[320:358]))
+    data["departures"].append(create_row(departures[358:399]))
+
+    for row in data["departures"]:
+        row["cells"]["type"] = row["row"][:, :94]
+        row["cells"]["number"] = row["row"][:, 94:219]
+        row["cells"]["destination"] = row["row"][:, 219:422]
+        row["cells"]["operator"] = row["row"][:, 422:626]
+        row["cells"]["time"] = row["row"][:, 626:747]
+        row["cells"]["delay"] = row["row"][:, 747:859]
+        row["cells"]["platform"] = row["row"][:, 859:]
 
     return data
