@@ -96,4 +96,6 @@ I should probably expand a little more upon this project. Cool things would be (
 
 ## Endnote
 
+A demo of this CLI tool and API as well as the iOS client I've build can be found at https://youtu.be/gvR8AaXw0cc.
+
 This project is being developed as a submission to [HackClub](https://hackclub.com/). It is still very much a WIP.

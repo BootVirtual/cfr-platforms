@@ -17,7 +17,7 @@ number_config = (
 
 platform_config = (
     "--psm 7 "
-    "-c tessedit_char_whitelist=1234567890A"
+    "-c tessedit_char_whitelist=1234567890"
 )
 
 class_config = (
